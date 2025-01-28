@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Horas Trabalhadas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Horas Trabalhadas</h1>
+
+        <div class="semana-container">
+            <h3>Semana Atual</h3>
+            <!-- Estrutura de dias da semana -->
+            <!-- Segunda -->
+            <div class="dia-semana">
+                <h4>Segunda-feira</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="segunda-entrada">Entrada</label>
+                        <input type="time" id="segunda-entrada" class="input-time" data-next="segunda-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="segunda-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="segunda-saida-almoco" class="input-time"
+                            data-next="segunda-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="segunda-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="segunda-volta-almoco" class="input-time" data-next="segunda-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="segunda-saida">Saída</label>
+                        <input type="time" id="segunda-saida" class="input-time" data-next="botao-salvar-segunda">
+                    </div>
+                    <button id="botao-salvar-segunda" onclick="adicionarRegistro('segunda')" class="input-time"
+                        data-next="terca-entrada">Salvar</button>
+                </div>
+            </div>
+
+            <!-- Terça -->
+            <div class="dia-semana">
+                <h4>Terça-feira</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="terca-entrada">Entrada</label>
+                        <input type="time" id="terca-entrada" class="input-time" data-next="terca-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="terca-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="terca-saida-almoco" class="input-time" data-next="terca-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="terca-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="terca-volta-almoco" class="input-time" data-next="terca-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="terca-saida">Saída</label>
+                        <input type="time" id="terca-saida" class="input-time" data-next="botao-salvar-terca">
+                    </div>
+                    <button id="botao-salvar-terca" onclick="adicionarRegistro('terca')" class="input-time"
+                        data-next="quarta-entrada">Salvar</button>
+                </div>
+            </div>
+
+            <!-- Quarta-feira -->
+            <div class="dia-semana">
+                <h4>Quarta-feira</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="quarta-entrada">Entrada</label>
+                        <input type="time" id="quarta-entrada" class="input-time" data-next="quarta-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="quarta-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="quarta-saida-almoco" class="input-time" data-next="quarta-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="quarta-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="quarta-volta-almoco" class="input-time" data-next="quarta-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="quarta-saida">Saída</label>
+                        <input type="time" id="quarta-saida" class="input-time" data-next="botao-salvar-quarta">
+                    </div>
+                    <button id="botao-salvar-quarta" onclick="adicionarRegistro('quarta')" class="input-time"
+                        data-next="quinta-entrada">Salvar</button>
+                </div>
+            </div>
+
+            <!-- Quinta-feira -->
+            <div class="dia-semana">
+                <h4>Quinta-feira</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="quinta-entrada">Entrada</label>
+                        <input type="time" id="quinta-entrada" class="input-time" data-next="quinta-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="quinta-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="quinta-saida-almoco" class="input-time" data-next="quinta-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="quinta-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="quinta-volta-almoco" class="input-time" data-next="quinta-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="quinta-saida">Saída</label>
+                        <input type="time" id="quinta-saida" class="input-time" data-next="botao-salvar-quinta">
+                    </div>
+                    <button id="botao-salvar-quinta" onclick="adicionarRegistro('quinta')" class="input-time"
+                        data-next="sexta-entrada">Salvar</button>
+                </div>
+
+            </div>
+            <!-- Sexta-feita -->
+            <div class="dia-semana">
+                <h4>Sexta-feira</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="sexta-entrada">Entrada</label>
+                        <input type="time" id="sexta-entrada" class="input-time" data-next="sexta-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="sexta-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="sexta-saida-almoco" class="input-time" data-next="sexta-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="sexta-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="sexta-volta-almoco" class="input-time" data-next="sexta-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="sexta-saida">Saída</label>
+                        <input type="time" id="sexta-saida" class="input-time" data-next="botao-salvar-sexta">
+                    </div>
+                    <button id="botao-salvar-sexta" onclick="adicionarRegistro('sexta')" class="input-time"
+                        data-next="sabado-entrada">Salvar</button>
+                </div>
+            </div>
+
+            <!-- Sábado -->
+            <div class="dia-semana">
+                <h4>Sábado</h4>
+                <div class="input-grupo">
+                    <div class="input-container">
+                        <label for="sabado-entrada">Entrada</label>
+                        <input type="time" id="sabado-entrada" class="input-time" data-next="sabado-saida-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="sabado-saida-almoco">Saída Almoço</label>
+                        <input type="time" id="sabado-saida-almoco" class="input-time" data-next="sabado-volta-almoco">
+                    </div>
+                    <div class="input-container">
+                        <label for="sabado-volta-almoco">Volta Almoço</label>
+                        <input type="time" id="sabado-volta-almoco" class="input-time" data-next="sabado-saida">
+                    </div>
+                    <div class="input-container">
+                        <label for="sabado-saida">Saída</label>
+                        <input type="time" id="sabado-saida" class="input-time" data-next="botao-salvar-sabado">
+                    </div>
+                    <button id="botao-salvar-sabado" onclick="adicionarRegistro('Sábado')" class="input-time"
+                        data-next="domingo-entrada">Salvar</button>
+                </div>
+
+                <!-- Domingo -->
+                <div class="dia-semana">
+                    <h4>Domingo</h4>
+                    <div class="input-grupo">
+                        <div class="input-container">
+                            <label for="domingo-entrada">Entrada</label>
+                            <input type="time" id="domingo-entrada" class="input-time" data-next="domingo-saida-almoco">
+                        </div>
+                        <div class="input-container">
+                            <label for="domingo-saida-almoco">Saída Almoço</label>
+                            <input type="time" id="domingo-saida-almoco" class="input-time"
+                                data-next="domingo-volta-almoco">
+                        </div>
+                        <div class="input-container">
+                            <label for="domingo-volta-almoco">Volta Almoço</label>
+                            <input type="time" id="domingo-volta-almoco" class="input-time" data-next="domingo-saida">
+                        </div>
+                        <div class="input-container">
+                            <label for="domingo-saida">Saída</label>
+                            <input type="time" id="domingo-saida" class="input-time" data-next="botao-salvar-domingo">
+                        </div>
+                        <button id="botao-salvar-domingo" onclick="adicionarRegistro('Domingo-feira')"
+                            class="input-time" data-next="gerar-pdf">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
+            <table id="tabelaHoras">
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Entrada</th>
+                        <th>Saída Almoço</th>
+                        <th>Volta Almoço</th>
+                        <th>Saída</th>
+                        <th>Total</th>
+                        <th button onclick="removerRegistro(this)">Ação</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <div>
+                <h3>Resumo</h3>
+                <p>Total da Semana: <span id="totalSemana">0h</span></p>
+                <p>Total do Mês: <span id="totalMes">0h</span></p>
+                <button id="gerar-pdf" onclick="gerarPDF()">Baixar PDF</button>
+            </div>
+        </div>
+</body>
+
+</html>
