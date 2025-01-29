@@ -10,55 +10,8 @@
     --rare-item: #ff2e63;
     --legendary-item: #fee440;
     --mana-color: rgba(77, 91, 206, 0.3);
+    --boss-color: #ff006e;
 }
-
-/* Melhorias na Responsividade */
-@media (max-width: 1024px) {
-    .container {
-        max-width: 95%;
-        padding: 20px;
-    }
-
-    table {
-        font-size: 14px;
-    }
-    
-    button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-        border-width: 1px;
-    }
-
-    h3, h4 {
-        font-size: 18px;
-    }
-
-    .input-grupo {
-        grid-template-columns: 1fr;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    th, td {
-        padding: 8px;
-    }
-
-    button {
-        font-size: 12px;
-        padding: 8px 15px;
-    }
-}
-
-
 
 /* Reset mais rápido que speedrun */
 * {
@@ -96,6 +49,7 @@ body {
     margin: 0 auto;
     padding: 25px;
     position: relative;
+    animation: spawn-container 0.5s ease-out;
 }
 
 /* Headings style Game Title */
@@ -105,6 +59,25 @@ h3, h4 {
     letter-spacing: 1px;
     margin: 15px 0;
     text-shadow: 0 0 8px rgba(254, 228, 64, 0.3);
+    position: relative;
+    display: inline-block;
+}
+
+h3::after, h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--legendary-item), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+h3:hover::after, h4:hover::after {
+    transform: scaleX(1);
 }
 
 /* Input grupo style Party Formation */
@@ -116,6 +89,12 @@ h3, h4 {
     padding: 15px;
     background: rgba(77, 91, 206, 0.1);
     border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.input-grupo:hover {
+    background: rgba(77, 91, 206, 0.15);
+    transform: translateY(-2px);
 }
 
 /* Input style Equipment Slot */
@@ -132,6 +111,7 @@ h3, h4 {
     border-color: var(--primary-power);
     box-shadow: 0 0 10px var(--primary-power);
     outline: none;
+    transform: scale(1.02);
 }
 
 /* Button style Power Button */
@@ -148,9 +128,33 @@ button {
     overflow: hidden;
 }
 
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 15px var(--primary-power);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: scale(0.95);
 }
 
 /* Table style Quest Log */
@@ -166,40 +170,166 @@ th {
     color: var(--legendary-item);
     padding: 12px;
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--legendary-item);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+th:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 td {
     padding: 10px;
     border-bottom: 1px solid var(--mana-color);
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 tr:hover td {
     background: rgba(0, 255, 163, 0.1);
+    color: var(--primary-power);
 }
 
-/* Estilização extra para telas muito pequenas (como celulares antigos) */
-@media (max-width: 480px) {
+/* Loading Animation */
+@keyframes spawn-container {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Error state style Boss Fight */
+.input-time.error {
+    border-color: var(--boss-color);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Loading style Charging Ultimate */
+.loading {
+    position: relative;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '⚡';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: charging 1s infinite;
+}
+
+@keyframes charging {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* Responsividade style Portable Mode */
+@media (max-width: 768px) {
     .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .input-grupo {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Dark mode é vida! */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-spell: #f0f4f8;
+    }
+}
+
+/* Scrollbar style HUD Element */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-dungeon);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-power);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-power);
+}
+
+/* Easter Egg: Konami Code Mode 🎮 */
+body.konami-mode {
+    animation: rainbow-bg 3s linear infinite;
+}
+
+@keyframes rainbow-bg {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* Responsividade style Multi-Platform Support 🎮 */
+/* Mobile First FTW! */
+@media (max-width: 480px) {
+    body {
         padding: 10px;
+        font-size: 14px;
+    }
+
+    .container {
         margin: 5px;
+        padding: 10px;
+        border-width: 1px;
     }
 
     h3, h4 {
-        font-size: 16px;
-        text-align: center;
+        font-size: 1.2rem;
     }
 
-    .input-time {
-        font-size: 14px;
+    .input-grupo {
+        grid-template-columns: 1fr;
+        gap: 10px;
         padding: 10px;
     }
 
     button {
         width: 100%;
-        text-align: center;
-        font-size: 14px;
-        padding: 12px;
+        padding: 10px 20px;
     }
 
     table {
@@ -207,4 +337,150 @@ tr:hover td {
         overflow-x: auto;
         white-space: nowrap;
     }
+
+    td, th {
+        padding: 8px;
+        min-width: 120px;
+    }
+}
+
+/* Tablet/iPad style */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .input-grupo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    button {
+        width: auto;
+        min-width: 200px;
+    }
+}
+
+/* Laptop/Small Desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .input-grupo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 4K/Ultra Wide Support */
+@media (min-width: 1921px) {
+    .container {
+        max-width: 1800px;
+    }
+
+    body {
+        font-size: 18px;
+    }
+
+    .input-grupo {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+/* Orientação Landscape pra Mobile Gaming */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    .input-grupo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Modo Printing (pra documentar seus high scores 🏆) */
+@media print {
+    body {
+        background: none;
+        color: black;
+    }
+
+    .container {
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+
+    button {
+        display: none;
+    }
+}
+
+
+/* Mobile Table Transformation Jutsu 📱 */
+@media (max-width: 480px) {
+    /* Container da tabela com scroll vertical */
+    .table-container {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    /* Reset na table pra mobile */
+    table {
+        display: block;
+        overflow-x: hidden; /* Remove scroll horizontal */
+    }
+
+    /* Game Over pro table header */
+    thead {
+        display: none; /* Tchau, thead! */
+    }
+
+    /* Cada TR vira um card */
+    tr {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Layout 2 colunas */
+        gap: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: rgba(77, 91, 206, 0.1);
+        border-radius: 8px;
+    }
+
+    /* TD transformation */
+    td {
+        display: grid;
+        grid-template-rows: auto auto;
+        padding: 8px;
+        text-align: center;
+        border: 1px solid var(--mana-color);
+        border-radius: 4px;
+    }
+
+    /* Label pros dados */
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--legendary-item);
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        font-size: 0.8em;
+    }
+
+    /* Botão de ação sempre visível */
+    td:last-child {
+        grid-column: 1 / -1; /* Ocupa linha inteira */
+        text-align: center;
+    }
+}
+ /* Buff na cor dos dias da semana 🎮 */
+ td[data-label="Dia"] {
+    color: var(--legendary-item); /* mesma cor padrão do texto */
+    background: rgba(77, 91, 206, 0.15); /* aquele background sutil */
+}
+
+/* Efeito hover maroto */
+td[data-label="Dia"]:hover {
+    background: rgba(77, 91, 206, 0.2);
+    transition: background 0.3s ease;
 }
