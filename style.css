@@ -1,117 +1,210 @@
+/* Imports do multiverso */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap');
+
+/* Stats base do personagem */
+:root {
+    --primary-power: #00ffa3;
+    --secondary-power: #4d5bce;
+    --dark-dungeon: #1a1a2e;
+    --light-spell: #e2e8f0;
+    --rare-item: #ff2e63;
+    --legendary-item: #fee440;
+    --mana-color: rgba(77, 91, 206, 0.3);
+}
+
+/* Melhorias na Responsividade */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        border-width: 1px;
+    }
+
+    h3, h4 {
+        font-size: 18px;
+    }
+
+    .input-grupo {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+}
+
+
+
+/* Reset mais rápido que speedrun */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oxanium', 'Segoe UI', sans-serif;
+}
+
+/* Body com background style RPG map */
 body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
+    background: var(--dark-dungeon);
+    background-image: 
+        linear-gradient(30deg, var(--mana-color) 12%, transparent 12.5%, transparent 87%, var(--mana-color) 87.5%, var(--mana-color)),
+        linear-gradient(150deg, var(--mana-color) 12%, transparent 12.5%, transparent 87%, var(--mana-color) 87.5%, var(--mana-color)),
+        linear-gradient(30deg, var(--mana-color) 12%, transparent 12.5%, transparent 87%, var(--mana-color) 87.5%, var(--mana-color)),
+        linear-gradient(150deg, var(--mana-color) 12%, transparent 12.5%, transparent 87%, var(--mana-color) 87.5%, var(--mana-color));
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+    color: var(--light-spell);
+    line-height: 1.6;
+    min-height: 100vh;
     padding: 20px;
 }
 
+/* Container style Gaming UI */
 .container {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid var(--primary-power);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 163, 0.2);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px;
+    position: relative;
 }
 
-/* Novo estilo pros dias da semana */
-.semana-container {
-    margin: 20px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+/* Headings style Game Title */
+h3, h4 {
+    color: var(--legendary-item);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 15px 0;
+    text-shadow: 0 0 8px rgba(254, 228, 64, 0.3);
 }
 
-.dia-semana {
-    margin: 10px 0;
-    padding: 10px;
-    background: #f8f8f8;
-    border-radius: 4px;
-}
-
-.dia-semana h4 {
-    margin: 0 0 15px 0;
-    text-align: center;
-    font-weight: bold;
-}
-
+/* Input grupo style Party Formation */
 .input-grupo {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin: 5px 0;
-}
-.input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espaço entre o label e o input */
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(77, 91, 206, 0.1);
+    border-radius: 8px;
 }
 
-.input-container label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #555;
-    text-align: center; /* Cor do texto do label */
-}
-
-.input-container input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
+/* Input style Equipment Slot */
 .input-time {
-    outline: none; /* Remove a borda padrão */
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 4px;
-    text-align: center; /* Centraliza o texto */
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid var(--secondary-power);
+    color: var(--primary-power);
+    padding: 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
 .input-time:focus {
-    border: 2px solid #28a745; /* Borda verde ao focar */
-    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Efeito de sombra */
+    border-color: var(--primary-power);
+    box-shadow: 0 0 10px var(--primary-power);
+    outline: none;
 }
 
-
-
-select {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
+/* Button style Power Button */
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 15px;
+    background: linear-gradient(45deg, var(--primary-power), var(--secondary-power));
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    color: var(--dark-dungeon);
     cursor: pointer;
-    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
-    background-color: #1d5520;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--primary-power);
 }
 
-.ad-space {
+/* Table style Quest Log */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
     margin: 20px 0;
-    padding: 20px;
-    background-color: #eee;
-    text-align: center;
-    border-radius: 4px;
+}
+
+th {
+    background: var(--dark-dungeon);
+    color: var(--legendary-item);
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--mana-color);
+    transition: background 0.3s ease;
+}
+
+tr:hover td {
+    background: rgba(0, 255, 163, 0.1);
+}
+
+/* Estilização extra para telas muito pequenas (como celulares antigos) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        margin: 5px;
+    }
+
+    h3, h4 {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .input-time {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
