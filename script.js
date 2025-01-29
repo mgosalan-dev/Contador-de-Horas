@@ -324,15 +324,15 @@ async function gerarPDF() {
         y += 10;
         doc.setFontSize(14);
         const totalSemana = document.getElementById('totalSemana').textContent;
-        const totalMes = document.getElementById('totalMes').textContent;
+        
         
         // Área de totais mais destacada
         doc.setDrawColor(0);
         doc.setFillColor(240, 240, 240);
         doc.rect(10, y - 5, 190, 30, "F");
+        doc.setFontSize(16);
+        doc.text(`Total da ${diasExtras ? "Periodo Extra" : "Semana"}: ${totalSemana}`, 71, y + 12);
         
-        doc.text(`Total da ${diasExtras ? "Periodo Extra" : "Semana"}: ${totalSemana}`, 20, y + 5);
-        doc.text(`Total Acumulado do Mes: ${totalMes}`, 20, y + 20);
 
         // Easter egg atualizado
         doc.setTextColor(0,0,0);
