@@ -6,10 +6,6 @@
 
 Um sistema web para controle de horas trabalhadas com temática gamer, permitindo o registro diário de horários e gerando relatórios em PDF. Desenvolvido com HTML, CSS e JavaScript puro (vanilla).
 
-## 📸 Screenshots
-
-![Aplicação](https://via.placeholder.com/800x400?text=Time+Tracker+Pro)
-
 ## ✨ Funcionalidades
 
 - 🗓️ Registro de entrada, saída para almoço, retorno do almoço e saída final
